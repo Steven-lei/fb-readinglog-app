@@ -99,6 +99,25 @@ function Navbar({ setBooks }) {
               >
                 query by year
               </Dropdown.Item>
+              <Dropdown.Item
+                onClick={() => {
+                  searchCondition !== "" &&
+                    FBDataService.getAllBooks()
+                      .then((data) => {
+                        setBooks(
+                          data.docs.map((doc) => ({
+                            ...doc.data(),
+                            key: doc.id,
+                          }))
+                        );
+                      })
+                      .catch((err) => {
+                        console.log(err);
+                      });
+                }}
+              >
+                get all books
+              </Dropdown.Item>
             </DropdownButton>
           </Col>
         </Row>

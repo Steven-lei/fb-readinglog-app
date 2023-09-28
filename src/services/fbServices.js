@@ -41,8 +41,12 @@ class FBDataService {
     const data = doc(db, "books", id);
     return getDoc(data);
   };
-  getAllBooks = () => {
-    return getDocs(collection(db, "books"));
+  getAllBooks = (orderby, ordermethod) => {
+    const q = query(
+      collection(db, "books"),
+      orderBy(orderby || "createdtime", ordermethod || "desc")
+    );
+    return getDocs(q);
   };
 
   addReview = (bookid, newData) => {

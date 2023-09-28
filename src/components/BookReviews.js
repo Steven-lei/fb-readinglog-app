@@ -59,7 +59,7 @@ function BookReviews({ bookid }) {
           <React.Fragment key={review.key}>
             <Container className="comment-author">
               <a href={"mailto://" + review.author.email}>
-                {review.author && review.author.name}
+                {review?.author?.name || "(NULL)"}
               </a>{" "}
               at {review.time.toDate().toLocaleString()}:
             </Container>

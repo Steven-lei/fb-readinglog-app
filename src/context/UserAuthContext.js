@@ -14,7 +14,7 @@ const userAuthContext = createContext();
 
 export function UserAuthContextProvider({ children }) {
   const [user, setUser] = useState();
-  const [uid, setUid] = useState();
+  // const [uid, setUid] = useState();
 
   function logIn(email, password) {
     return signInWithEmailAndPassword(auth, email, password);
@@ -34,7 +34,7 @@ export function UserAuthContextProvider({ children }) {
     const unsubscribe = onAuthStateChanged(auth, async (currentuser) => {
       console.log("Auth", currentuser);
       setUser(currentuser);
-      currentuser ? setUid(currentuser.uid) : setUid(null);
+      // currentuser ? setUid(currentuser.uid) : setUid(null);
     });
 
     return () => {
