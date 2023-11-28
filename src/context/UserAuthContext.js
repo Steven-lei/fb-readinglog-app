@@ -5,7 +5,10 @@ import {
   onAuthStateChanged,
   signOut,
   GoogleAuthProvider,
+  FacebookAuthProvider,
+  GithubAuthProvider,
   signInWithPopup,
+  signInWithRedirect,
 } from "firebase/auth";
 import { auth } from "../fb-config";
 import FBDataService from "../services/fbServices";
@@ -29,7 +32,16 @@ export function UserAuthContextProvider({ children }) {
     const googleAuthProvider = new GoogleAuthProvider();
     return signInWithPopup(auth, googleAuthProvider);
   }
-
+  function facebookSignIn() {
+    console.log("facebookSignIn");
+    const faceAuthProvider = new FacebookAuthProvider();
+    return signInWithPopup(auth, faceAuthProvider);
+  }
+  function githubSignIn() {
+    const provider = new GithubAuthProvider();
+    return signInWithPopup(auth, provider);
+    //return signInWithPopup(auth, provider);
+  }
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentuser) => {
       console.log("Auth", currentuser);
@@ -44,7 +56,15 @@ export function UserAuthContextProvider({ children }) {
 
   return (
     <userAuthContext.Provider
-      value={{ user, logIn, signUp, logOut, googleSignIn }}
+      value={{
+        user,
+        logIn,
+        signUp,
+        logOut,
+        googleSignIn,
+        facebookSignIn,
+        githubSignIn,
+      }}
     >
       {children}
     </userAuthContext.Provider>

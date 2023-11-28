@@ -22,32 +22,23 @@ import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
-import FormLabel from "@mui/material/FormLabel";
 function BookList({ books, orderby, setOrderby, orderMethod, setOrderMethod }) {
   console.log(books);
   const { user } = useUserAuth();
-  const CustomToggle = React.forwardRef(({ children, onClick }, ref) => (
-    <div
-      ref={ref}
-      onClick={(e) => {
-        e.preventDefault();
-        onClick(e);
-      }}
-    >
-      {children}
-      &#x25BE;
-    </div>
-  ));
   return (
     <Table>
       <thead>
         <tr>
-          <th>
+          <td>
             <Container>
-              <Row>
-                <Col style={{ verticalAlign: "center", display: "flex" }}>
-                  <div>Books</div>
-                </Col>
+              <Row
+                style={{
+                  alignItems: "center",
+                  justifyContent: "center",
+                  display: "flex",
+                }}
+              >
+                <Col>Books</Col>
                 <Col>
                   <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
                     <Select
@@ -89,13 +80,20 @@ function BookList({ books, orderby, setOrderby, orderMethod, setOrderMethod }) {
                 </Col>
               </Row>
             </Container>
-          </th>
-          <th>
-            <Row>
-              <Col>Reviews</Col>
-            </Row>
-          </th>
-          <th></th>
+          </td>
+          <td>
+            <Container fluid>
+              <Row
+                style={{
+                  alignItems: "center",
+                  justifyContent: "center",
+                  display: "flex",
+                }}
+              >
+                <Col>Reviews</Col>
+              </Row>
+            </Container>
+          </td>
         </tr>
       </thead>
       <tbody>

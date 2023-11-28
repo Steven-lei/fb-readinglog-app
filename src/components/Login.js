@@ -10,10 +10,12 @@ import { useUserAuth } from "../context/UserAuthContext";
 import GoogleButton from "react-google-button";
 import { Link, useNavigate } from "react-router-dom";
 import "./Login.css";
+import FacebookLogin from "react-facebook-login";
+import GithubLogin from "react-github-login";
 function Login() {
   const [account, setAccount] = useState();
   const [password, setPassword] = useState();
-  const { logIn, googleSignIn } = useUserAuth();
+  const { logIn, googleSignIn, facebookSignIn, githubSignIn } = useUserAuth();
   const [error, setError] = useState();
   const navigate = useNavigate();
   const handleLogin = async () => {
@@ -23,7 +25,8 @@ function Login() {
       console.log("login successfully");
       navigate("/");
     } catch (err) {
-      setError(err);
+      console.log(err);
+      setError(err.message);
     }
   };
   const handleGoogleLogin = async () => {
@@ -31,7 +34,27 @@ function Login() {
       await googleSignIn();
       navigate("/");
     } catch (err) {
-      setError(err);
+      console.log(err);
+      setError(err.message);
+    }
+  };
+  const handleFacebookLogin = async (e) => {
+    e.preventDefault();
+    try {
+      await facebookSignIn();
+      navigate("/");
+    } catch (err) {
+      console.log(err);
+      setError(err.message);
+    }
+  };
+  const handleGithubLogin = async () => {
+    try {
+      await githubSignIn();
+      navigate("/");
+    } catch (err) {
+      console.log(err);
+      setError(err.message);
     }
   };
   return (
@@ -77,6 +100,21 @@ function Login() {
                 onClick={handleGoogleLogin}
                 style={{ width: "100%" }}
               ></GoogleButton>
+              <Button
+                className="mt-3"
+                onClick={handleGithubLogin}
+                style={{ width: "100%" }}
+              >
+                Login With Github Account
+              </Button>
+
+              <Button
+                className="mt-3"
+                onClick={handleFacebookLogin}
+                style={{ width: "100%" }}
+              >
+                Login With Facebook Account
+              </Button>
             </div>
           </div>
         </div>

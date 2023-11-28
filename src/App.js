@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import FBDataService from "./services/fbServices";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Image } from "react-bootstrap";
+import { Button, Image } from "react-bootstrap";
 import Navbar from "./components/Navbar";
 import BookList from "./components/BookList";
 import Container from "react-bootstrap/Container";
@@ -65,20 +65,29 @@ function App() {
   return (
     <>
       <Navbar setBooks={setBooks}></Navbar>
-      <div className="container">
-        <div className="panel panel-default">
-          <div className="panel-heading">
-            <h3 className="panel-title">All Books</h3>
-          </div>
-          <div className="panel-body">
-            <Row className="my-5">
-              {user && (
-                <Link to="/createbook" className="btn btn-primary">
-                  Add Book
-                </Link>
-              )}
-            </Row>
 
+      <Container>
+        <Row className="panel-heading">
+          <Col>
+            <h3>All Books</h3>
+          </Col>
+        </Row>
+        <Row className="my-5">
+          <Col>
+            {user && (
+              <Link
+                as="Button"
+                to="/createbook"
+                className="btn btn-primary"
+                style={{ width: "100%" }}
+              >
+                Add Book
+              </Link>
+            )}
+          </Col>
+        </Row>
+        <Row>
+          <Col>
             <BookList
               books={books}
               orderby={orderby}
@@ -86,9 +95,9 @@ function App() {
               orderMethod={orderMethod}
               setOrderMethod={setOrderMethod}
             ></BookList>
-          </div>
-        </div>
-      </div>
+          </Col>
+        </Row>
+      </Container>
     </>
   );
 }

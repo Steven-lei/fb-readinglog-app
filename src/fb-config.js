@@ -10,7 +10,6 @@ const firebaseConfig = {
   storageBucket: "fbreactprj-65d18.appspot.com",
   messagingSenderId: "381599542580",
   appId: "1:381599542580:web:e0d1cde10fb43f67e74961",
-  storageBucket: "gs://fbreactprj-65d18.appspot.com",
 };
 
 const app = initializeApp(firebaseConfig);
